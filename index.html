@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Screenshot Web Interface</title>
+    <title>Screenshot Trigger</title>
 </head>
 <body>
     <h1>Take a Screenshot</h1>
-    <form action="/screenshot" method="POST">
-        <input type="hidden" id="webhook_url" name="webhook_url" value="https://discord.com/api/webhooks/1302978525611167744/_zm-jpfaRoXUmO8iTp-JsTenj-ucvanQjVtu-4gUqN5jsF43zF9TKGOPm71qObMDJinq">
-        <button type="submit">Take Screenshot</button>
-    </form>
+    <button onclick="triggerScreenshot()">Take Screenshot</button>
+
+    <script>
+        function triggerScreenshot() {
+            fetch('http://localhost:5000/trigger_screenshot')
+                .then(response => {
+                    if (response.ok) {
+                        alert('Screenshot taken and sent successfully.');
+                    } else {
+                        alert('Failed to take screenshot.');
+                    }
+                })
+                .catch(error => {
+                    alert('Error: ' + error);
+                });
+        }
+    </script>
 </body>
 </html>
